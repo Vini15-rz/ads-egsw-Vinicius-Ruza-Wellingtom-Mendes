@@ -1,315 +1,115 @@
-# ads-egsw-Vinicius-Ruza-Wellington-Mendes
-Esse projeto irá simular uma batalha Pokémon em que o usuário escolhe o nível, tipo e nome dos Pokémon participantes
-#include <stdio.h>
-#include <math.h>
-#include <locale.h>
-int ataquep (int nivelp, int tipo1){
-    int status1, status2, atq;
-    if (tipo1==1){
-        atq=nivelp*2+7; 
-    }
-    else if(tipo1==2){
-        atq=nivelp*2+4;
-    }
-    else {
-        atq=nivelp*2+2;
-    }
-    return atq;
-}
-int ataquer(int nivelr,int tipo2){
-    int atq;
-    if(tipo2==1){
-        atq=nivelr*2+7; 
-    }
-    else if(tipo2==2){
-        atq=nivelr*2+4;
-    }
-    else {
-        atq=nivelr*2+2;
-    }
-    return atq;
-}
-int defesap(int nivelp, int tipo1){
-    int def;
-    if(tipo1==1){
-        def=nivelp*1.5+5;
-        def=trunc(def);
-    }
-    else if(tipo1==2){
-        def=nivelp*2+5;
-    }
-    else{
-        def=nivelp*2.5+5;
-        def=trunc(def);
-    }
-    return def;
-}
-int defesar(int nivelr, int tipo2){
-    int def;
-    if(tipo2==1){
-        def=nivelr*1.5+5;
-        def=trunc(def);
-    }
-    else if(tipo2==2){
-        def=nivelr*2+5;
-    }
-    else{
-        def=nivelr*2.5+5;
-        def=trunc(def);
-    }
-    return def;
-}
-int saudep(int nivelp, int tipo1){
-    int vida;
-    if(tipo1==1){
-        vida=nivelp*2+9;
-    }
-    else if(tipo1==2){
-        vida=nivelp*2+12;
-    }
-    else{
-        vida=nivelp*2+10;
-    }
-    return vida;
-}
-int sauder(int nivelr, int tipo2){
-    int vida;
-    if(tipo2==1){
-        vida=nivelr*2+9;
-    }
-    else if(tipo2==2){
-        vida=nivelr*2+12;
-    }
-    else{
-        vida=nivelr*2+10;
-    }
-    return vida;
-}
-int velocidadep(int nivelp, int tipo1){
-    int vel;
-    if (tipo1==1){
-        vel=nivelp*2+6;
-    }
-    else if (tipo1==2){
-        vel=nivelp*1.5+6;
-        vel=trunc(vel);
-    }
-    else {
-        vel=nivelp*2+4;
-    }
-    return vel;
-}
-int velocidader(int nivelr, int tipo2){
-    int vel;
-    if (tipo2==1){
-        vel=nivelr*2+6;
-    }
-    else if (tipo2==2){
-        vel=nivelr*1.5+6;
-        vel=trunc(vel);
-    }
-    else {
-        vel=nivelr*2+4;
-    }
-    return vel;
-}
-int fraquezap(int tipo1, int tipo2){
-    int fraqueza;
-    if(tipo1==1 && tipo2==2){
-        fraqueza=1;
-    }
-    else if(tipo1==2 && tipo2==3){
-        fraqueza=1;
-    }
-    else if(tipo1==3 && tipo2==1){
-        fraqueza=1;
-    }
-    else{
-        fraqueza=0;
-    }
-    return fraqueza;
-}
-int resistenciap(int tipo1, int tipo2){
-    int resistencia;
-    if(tipo1==1 && tipo2==3){
-        resistencia=1;
-    }
-    else if(tipo1==2 && tipo2==1){
-        resistencia=1;
-    }
-    else if (tipo1==3 && tipo2==2){
-        resistencia=1;
-    }
-    else{
-        resistencia=0;
-    }
-    return resistencia;
-}
-int fraquezar(int tipo2, int tipo1){
-    int fraqueza;
-    if (tipo2==1 && tipo1==2){
-        fraqueza=1;
-    }
-    else if (tipo2==2 && tipo1==3){
-        fraqueza=1;
-    }
-    else if (tipo2==3 && tipo1==1){
-        fraqueza=1;
-    }
-    else{
-        fraqueza=0;
-    }
-    return fraqueza;
-}
-int resistenciar(int tipo2, int tipo1){
-    int resistencia;
-    if(tipo2==1 && tipo1==3){
-        resistencia=1;
-    }
-    else if(tipo2==2 && tipo1==1){
-        resistencia=1;;
-    }
-    else if(tipo2==3 && tipo1==2){
-        resistencia=1;
-    }
-    else{
-        resistencia=0;
-    }
-    return resistencia;
-}
-int main (){
-    setlocale(LC_ALL, "pt_BR.UTF-8");
-    char nome1[20];
-    int nivelp;
-    int tipo1;
-    char nome2[20];
-    int nivelr;
-    int tipo2;
-    int t=1;
-    int saudetotalp, saudetotalr, sauderestantep, sauderestanter;
-    printf("Qual o nome do seu parceiro?\n");
-    scanf("%s", nome1);
-    printf("Qual o nível do seu parceiro?\n");
-    scanf("%d", &nivelp);
-    printf("Seu parceiro é um pokemon do tipo:\n");
-    printf("1-Fogo 2-Água 3-Planta\n");
-    scanf("%d", &tipo1);
-    printf("Qual o nome do seu rival?\n");
-    scanf("%s", nome2);
-    printf("Qual o nível do seu rival?\n");
-    scanf("%d", &nivelr);
-    printf("Seu rival é um pokemon do tipo:\n");
-    printf("1-Fogo 2-Agua 3-Planta\n");
-    scanf("%d", &tipo2);
-    saudetotalp=saudep(nivelp, tipo1);
-    saudetotalr=sauder(nivelr, tipo2);
-    sauderestantep=saudetotalp;
-    sauderestanter=saudetotalr;
-    printf("Status do %s:\n", nome1);
-    printf("Saúde: %d\n", saudep(nivelp, tipo1));
-    printf("Ataque: %d\n", ataquep(nivelp, tipo1));
-    printf("Defesa: %d\n", defesap(nivelp, tipo1));
-    printf("Velocidade: %d\n", velocidadep(nivelp, tipo1));
-    printf("\n");
-    printf("Status do %s: \n", nome2);
-    printf("Saúde: %d\n", sauder(nivelr, tipo2));
-    printf("Ataque: %d\n", ataquer(nivelr, tipo2));
-    printf("Defesa: %d\n", defesar(nivelr, tipo2));
-    printf("Velocidade: %d\n", velocidader(nivelr, tipo2));
-    printf("\n");
-    printf("Que comece a batalha! Boa sorte para os competidores!\n");
-    while(1){
-        printf("Turno %d\n", t);
-        t++;
-        printf("%s %d/%d vs %s %d/%d\n", nome1, sauderestantep, saudetotalp, nome2, sauderestanter, saudetotalr);
-        if(velocidadep(nivelp, tipo1)>velocidader(nivelr, tipo2)){
-            int danop, danor;
-            danop=ataquep(nivelp, tipo1)-defesar(nivelr, tipo2);
-            if (danop<=0){
-                danop=3;
-            }
-            if (fraquezar(tipo2, tipo1)==1){
-                danop=danop*2;
-                printf("Ataque super efetivo! ");
-            }
-            else if(resistenciar(tipo2, tipo1)==1){
-                danop=danop/2;
-                printf("Ataque não muito efetivo...");
-            }
-            else{
-                danop=danop;
-            }
-            printf("%s causou %d de dano em %s\n", nome1, danop, nome2);
-            sauderestanter=sauderestanter-danop;
-            if(sauderestanter<=0){
-                printf("%s foi derrotado! %s é o vencedor!\n", nome2, nome1);
-                break;
-            }
-            danor=ataquer(nivelr, tipo2)-defesap(nivelp,tipo1);
-            if (danor<=0){
-                danor=3;
-            }
-            if(fraquezap(tipo1, tipo2)==1){
-                danor=danor*2;
-                printf("Ataque super efetivo! ");
-            }
-            else if(resistenciap(tipo1, tipo2)==1){
-                danor=danor/2;
-                printf("Ataque não é muito efetivo...");
-            }
-            else{
-                danor=danor;
-            }
-            printf("%s causou %d de dano em %s\n", nome2, danor, nome1);
-            sauderestantep=sauderestantep-danor;
-            if (sauderestantep<=0){
-                printf("%s foi derrotado! %s é o vencedor!\n", nome2, nome1);
-                break;
-            }
-        }
-        else{            int danop, danor;
-            danor=ataquep(nivelp, tipo1)-defesar(nivelr, tipo2);
-            if (danor<=0){
-                danor=3;
-            }
-            if (fraquezar(tipo1, tipo2)==1){
-                danor=danor*2;
-                printf("Ataque super efetivo! ");
-            }
-            else if(resistenciar(tipo1, tipo2)==1){
-                danop=danop/2;
-                printf("Ataque não muito efetivo...");
-            }
-            else{
-                danor=danor;
-            }
-            printf("%s causou %d de dano em %s\n", nome2, danor, nome1);
-            sauderestantep=sauderestantep-danor;
-            if(sauderestantep<=0){
-                printf("%s foi derrotado! %s é o vencedor!\n", nome1, nome2);
-                break;
-            }
-            danor=ataquer(nivelp, tipo1)-defesap(nivelr,tipo2);
-            if (danop<=0){
-                danop=3;
-            }
-            if(fraquezar(tipo2, tipo1)==1){
-                danop=danop*2;
-                printf("Ataque super efetivo! ");
-            }
-            else if(resistenciar(tipo2, tipo1)==1){
-                danop=danop/2;
-                printf("Ataque não é muito efetivo...");
-            }
-            else{
-                danop=danop;
-            }
-            printf("%s causou %d de dano em %s\n", nome2, danor, nome1);
-            sauderestantep=sauderestantep-danor;
-            if (sauderestanter<=0){
-                printf("%s foi derrotado! %s é o vencedor!\n", nome2, nome1);
-                break;
-            }
-        }
-    }
-}
+# ads-egsw-Vinicius-Ruza-Wellingtom-Mendes
+
+Simulação de batalha Pokémon em linguagem C. Você informa nome, nível e tipo de cada Pokémon; o programa calcula os status e executa a batalha por turnos até alguém vencer.
+
+## Como compilar e executar
+
+Pré-requisitos: GCC instalado.
+
+- Windows (PowerShell):
+
+  gcc pokemon_game.c -lm -o batalha.exe
+  
+  .\batalha.exe
+
+
+Observação: a opção -lm liga a biblioteca matemática (uso de trunc).
+
+## Regras rápidas
+
+Os tipos suportados são informados por número:
+
+- 1 = Fogo 🔥
+- 2 = Água  💧
+- 3 = Planta 🌱
+
+- Ordem do turno: quem tem maior velocidade ataca primeiro.
+- Dano: ataque − defesa; se o resultado for menor ou igual a 0, causa 3 de dano.
+- Eficácia por tipo:
+    - Super efetivo: dano x2
+    - Não efetivo: dano /2
+
+
+## Fluxo de jogo
+
+1) O programa pede: nome, nível e tipo (1/2/3) do seu Pokémon e do rival.
+2) Mostra os status calculados de cada um.
+3) Executa turnos até que a saúde de um chegue a 0.
+4) Exibe mensagens sobre dano, eficácia e o vencedor.
+
+
+## Ordem dos turnos e dano
+
+- Ordem: quem tem maior velocidade ataca primeiro. Em empate de velocidade, o rival ataca primeiro (pela implementação atual).
+- Dano base: dano = ataque - defesa. Se o resultado for <= 0, aplica dano mínimo 3.
+- Modificadores de eficácia: depois do dano base, se for super efetivo multiplica por 2; se for não muito efetivo divide por 2.
+
+Em resumo: dano_final = ajustaMinimo(max(3, ataque - defesa)) e então aplica x2 ou /2 conforme a vantagem de tipo.
+
+
+## Exemplo rápido (entrada/saída)
+
+
+## Entrada (exemplo):
+
+  Qual o nome do seu parceiro?
+  
+  Charmander
+  
+  Qual o nível do seu parceiro?
+  
+  5
+  
+  Seu parceiro é um pokemon do tipo:  1-Fogo 2-Água 3-Planta
+  
+  1
+  
+  Qual o nome do seu rival?
+  
+  Squirtle
+  
+  Qual o nível do seu rival?
+  
+  5
+  
+  Seu rival é um pokemon do tipo:  1-Fogo 2-Agua 3-Planta
+  
+  2
+  
+## Saída (trecho esperado):
+
+  Status do Charmander:
+  
+  Saúde: 19  
+  Ataque: 17  
+  Defesa: 12  
+  Velocidade: 16
+  
+  Status do Squirtle:
+  
+  Saúde: 22  
+  Ataque: 14  
+  Defesa: 15  
+  Velocidade: 13  
+  
+  Que comece a batalha! ...
+
+
+## Estrutura do projeto
+
+- `pokemon_game.c` — Código-fonte do programa.
+- `.gitignore` — Ignora binários, objetos e pastas de build.
+- `CHANGELOG.md` — Histórico de versões e mudanças.
+- `README.md` — Este arquivo descritivo do projeto
+
+## Fluxo de trabalho (GCS)
+
+- Branch principal: `main`.
+- Para mudanças, crie uma branch: `feature/<nome-da-feature>` ou `branch-<seu-nome>`.
+- Commits com mensagens claras e descritivas.
+- Abra Pull Request (PR) para integrar na `main`.
+- Após merge, atualize `CHANGELOG.md` com a nova versão.
+
+## Créditos
+
+Dupla: Vinícius Ruza e Wellington Mendes.
