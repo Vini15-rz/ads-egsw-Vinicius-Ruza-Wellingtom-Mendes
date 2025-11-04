@@ -187,10 +187,6 @@ int main (){
     int tipo2;
     int t=1;
     int saudetotalp, saudetotalr, sauderestantep, sauderestanter;
-    saudetotalp=saudep(nivelp, tipo1);
-    saudetotalr=sauder(nivelr, tipo2);
-    sauderestantep=saudetotalp;
-    sauderestanter=saudetotalr;
     printf("Qual o nome do seu parceiro?\n");
     scanf("%s", nome1);
     printf("Qual o nível do seu parceiro?\n");
@@ -257,7 +253,7 @@ int main (){
                 danor=danor*2;
                 printf("Ataque super efetivo! ");
             }
-            else if(resistenciap(tipo1, tipo2)==0){
+            else if(resistenciap(tipo1, tipo2)==1){
                 danor=danor/2;
                 printf("Ataque não é muito efetivo...");
             }
@@ -267,7 +263,51 @@ int main (){
             printf("%s causou %d de dano em %s\n", nome2, danor, nome1);
             sauderestantep=sauderestantep-danor;
             if (sauderestantep<=0){
+                printf("%s foi derrotado! %s é o vencedor!\n", nome2, nome1);
+                break;
+            }
+        }
+        else{            int danop, danor;
+            danor=ataquep(nivelp, tipo1)-defesar(nivelr, tipo2);
+            if (danor<=0){
+                danor=3;
+            }
+            if (fraquezar(tipo1, tipo2)==1){
+                danor=danor*2;
+                printf("Ataque super efetivo! ");
+            }
+            else if(resistenciar(tipo1, tipo2)==1){
+                danop=danop/2;
+                printf("Ataque não muito efetivo...");
+            }
+            else{
+                danor=danor;
+            }
+            printf("%s causou %d de dano em %s\n", nome2, danor, nome1);
+            sauderestantep=sauderestantep-danor;
+            if(sauderestantep<=0){
                 printf("%s foi derrotado! %s é o vencedor!\n", nome1, nome2);
+                break;
+            }
+            danor=ataquer(nivelp, tipo1)-defesap(nivelr,tipo2);
+            if (danop<=0){
+                danop=3;
+            }
+            if(fraquezar(tipo2, tipo1)==1){
+                danop=danop*2;
+                printf("Ataque super efetivo! ");
+            }
+            else if(resistenciar(tipo2, tipo1)==1){
+                danop=danop/2;
+                printf("Ataque não é muito efetivo...");
+            }
+            else{
+                danop=danop;
+            }
+            printf("%s causou %d de dano em %s\n", nome2, danor, nome1);
+            sauderestantep=sauderestantep-danor;
+            if (sauderestanter<=0){
+                printf("%s foi derrotado! %s é o vencedor!\n", nome2, nome1);
                 break;
             }
         }
