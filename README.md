@@ -1,115 +1,131 @@
-# ads-egsw-Vinicius-Ruza-Wellingtom-Mendes
+# Batalha Pokemon - Simulador em C
 
-Simulação de batalha Pokémon em linguagem C. Você informa nome, nível e tipo de cada Pokémon; o programa calcula os status e executa a batalha por turnos até alguém vencer.
+Simulador de combate Pokemon desenvolvido em C. O programa permite batalhas entre dois pokemons com sistema de tipos, calculo de dano e interface colorida no terminal.
 
-## Como compilar e executar
+## Versao 2.0 - Principais mudancas
 
-Pré-requisitos: GCC instalado.
+- Sistema expandido com 9 tipos de pokemon
+- Interface com cores ANSI diferentes para cada tipo
+- Barra de HP visual que muda conforme a vida restante
+- Sistema completo de vantagens e desvantagens entre tipos
+- Correcao de bugs na logica de combate
+- Tela limpa entre turnos
+- Pausas para melhor acompanhamento
 
-- Windows (PowerShell):
+## Compilacao
 
-  gcc pokemon_game.c -lm -o batalha.exe
-  
-  .\batalha.exe
+Requisitos: GCC instalado
 
+Windows:
+```
+gcc pokemon_game.c -lm -o pokemon.exe
+.\pokemon.exe
+```
 
-Observação: a opção -lm liga a biblioteca matemática (uso de trunc).
+Linux/Mac:
+```
+gcc pokemon_game.c -lm -o pokemon
+./pokemon
+```
 
-## Regras rápidas
+A flag -lm eh necessaria para a biblioteca matematica (funcao trunc).
 
-Os tipos suportados são informados por número:
+## Tipos disponiveis
 
-- 1 = Fogo 🔥
-- 2 = Água  💧
-- 3 = Planta 🌱
+Escolha por numero durante o jogo:
 
-- Ordem do turno: quem tem maior velocidade ataca primeiro.
-- Dano: ataque − defesa; se o resultado for menor ou igual a 0, causa 3 de dano.
-- Eficácia por tipo:
-    - Super efetivo: dano x2
-    - Não efetivo: dano /2
+1. Fogo - Alto ataque e velocidade, defesa baixa
+2. Agua - HP alto, defesa media, velocidade baixa  
+3. Planta - Alta defesa, ataque baixo, HP medio-alto
+4. Eletrico - Ataque e velocidade altissimos, HP baixo
+5. Gelo - Ataque alto, stats balanceados
+6. Lutador - Ataque altissimo, HP alto, velocidade media
+7. Voador - Velocidade muito alta, defesa baixa
+8. Psiquico - Stats altos e balanceados
+9. Noturno - HP alto, defesa media-alta, velocidade alta
 
+## Mecanicas de jogo
 
-## Fluxo de jogo
+Ordem de ataque: Pokemon mais rapido ataca primeiro
+Calculo de dano: ataque - defesa do oponente (minimo 3)
+Modificadores: x2 se super efetivo, /2 se nao muito efetivo
 
-1) O programa pede: nome, nível e tipo (1/2/3) do seu Pokémon e do rival.
-2) Mostra os status calculados de cada um.
-3) Executa turnos até que a saúde de um chegue a 0.
-4) Exibe mensagens sobre dano, eficácia e o vencedor.
+## Tabela de vantagens entre tipos
 
+Super efetivo (dano x2):
+- Fogo > Planta, Gelo
+- Agua > Fogo
+- Planta > Agua
+- Eletrico > Agua, Voador
+- Gelo > Planta, Voador
+- Lutador > Gelo, Noturno
+- Voador > Planta, Lutador
+- Psiquico > Lutador
+- Noturno > Psiquico
 
-## Ordem dos turnos e dano
-
-- Ordem: quem tem maior velocidade ataca primeiro. Em empate de velocidade, o rival ataca primeiro (pela implementação atual).
-- Dano base: dano = ataque - defesa. Se o resultado for <= 0, aplica dano mínimo 3.
-- Modificadores de eficácia: depois do dano base, se for super efetivo multiplica por 2; se for não muito efetivo divide por 2.
-
-Em resumo: dano_final = ajustaMinimo(max(3, ataque - defesa)) e então aplica x2 ou /2 conforme a vantagem de tipo.
-
-
-## Exemplo rápido (entrada/saída)
-
-
-## Entrada (exemplo):
-
-  Qual o nome do seu parceiro?
-  
-  Charmander
-  
-  Qual o nível do seu parceiro?
-  
-  5
-  
-  Seu parceiro é um pokemon do tipo:  1-Fogo 2-Água 3-Planta
-  
-  1
-  
-  Qual o nome do seu rival?
-  
-  Squirtle
-  
-  Qual o nível do seu rival?
-  
-  5
-  
-  Seu rival é um pokemon do tipo:  1-Fogo 2-Agua 3-Planta
-  
-  2
-  
-## Saída (trecho esperado):
-
-  Status do Charmander:
-  
-  Saúde: 19  
-  Ataque: 17  
-  Defesa: 12  
-  Velocidade: 16
-  
-  Status do Squirtle:
-  
-  Saúde: 22  
-  Ataque: 14  
-  Defesa: 15  
-  Velocidade: 13  
-  
-  Que comece a batalha! ...
+Fraco (dano /2):
+- Fogo < Agua, Gelo
+- Agua < Planta, Eletrico
+- Planta < Fogo, Gelo, Voador
+- Eletrico < Planta
+- Gelo < Fogo, Lutador
+- Lutador < Voador, Psiquico
+- Voador < Eletrico, Gelo
+- Psiquico < Noturno
+- Noturno < Lutador, Psiquico
 
 
-## Estrutura do projeto
+## Como funciona
 
-- `pokemon_game.c` — Código-fonte do programa.
-- `.gitignore` — Ignora binários, objetos e pastas de build.
-- `CHANGELOG.md` — Histórico de versões e mudanças.
-- `README.md` — Este arquivo descritivo do projeto
+1. Programa solicita nome, nivel e tipo de cada pokemon
+2. Calcula e exibe os stats baseados no nivel e tipo escolhido
+3. Batalha ocorre em turnos ate um pokemon chegar a 0 HP
+4. Exibe o vencedor ao final
 
-## Fluxo de trabalho (GCS)
+## Detalhes tecnicos
 
-- Branch principal: `main`.
-- Para mudanças, crie uma branch: `feature/<nome-da-feature>` ou `branch-<seu-nome>`.
-- Commits com mensagens claras e descritivas.
-- Abra Pull Request (PR) para integrar na `main`.
-- Após merge, atualize `CHANGELOG.md` com a nova versão.
+Ordem de ataque determinada pela velocidade (mais rapido ataca primeiro)
+Formula de dano: ataque_atacante - defesa_defensor (minimo de 3)
+Modificadores aplicados apos calculo base (x2 ou /2 conforme matchup)
 
-## Créditos
 
-Dupla: Vinícius Ruza e Wellington Mendes.
+## Exemplo de uso
+
+Entrada:
+```
+Nome do parceiro: Charmander
+Nivel: 5
+Tipo: 1 (Fogo)
+
+Nome do rival: Squirtle  
+Nivel: 5
+Tipo: 2 (Agua)
+```
+
+Saida:
+```
+Status do Charmander:
+HP: 19 | Ataque: 17 | Defesa: 12 | Velocidade: 16
+
+Status do Squirtle:
+HP: 22 | Ataque: 14 | Defesa: 15 | Velocidade: 13
+
+Batalha iniciada...
+```
+
+
+## Arquivos do projeto
+
+- pokemon_game.c - codigo fonte principal
+- CHANGELOG.md - historico de versoes
+- README.md - documentacao
+
+## Workflow
+
+Branch main para producao. Crie branches separadas para features (ex: branch-wellington).
+Commits devem ser descritivos. Use pull requests para merge na main.
+Atualize o CHANGELOG apos mudancas significativas.
+
+---
+
+Desenvolvido por Vinicius Ruza e Wellington Mendes
