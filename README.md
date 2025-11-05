@@ -117,13 +117,7 @@ int velocidader(int nivelr, int tipo2){
 }
 int fraquezap(int tipo1, int tipo2){
     int fraqueza;
-    if(tipo1==1 && tipo2==2){
-        fraqueza=1;
-    }
-    else if(tipo1==2 && tipo2==3){
-        fraqueza=1;
-    }
-    else if(tipo1==3 && tipo2==1){
+    if(tipo1==1 && tipo2==2 || tipo1==2 && tipo2==3 || tipo1==3 && tipo2==1){
         fraqueza=1;
     }
     else{
@@ -133,13 +127,7 @@ int fraquezap(int tipo1, int tipo2){
 }
 int resistenciap(int tipo1, int tipo2){
     int resistencia;
-    if(tipo1==1 && tipo2==3){
-        resistencia=1;
-    }
-    else if(tipo1==2 && tipo2==1){
-        resistencia=1;
-    }
-    else if (tipo1==3 && tipo2==2){
+    if(tipo1==1 && tipo2==3 || tipo1==2 && tipo2==1 || tipo1==3 && tipo2==2){
         resistencia=1;
     }
     else{
@@ -149,13 +137,7 @@ int resistenciap(int tipo1, int tipo2){
 }
 int fraquezar(int tipo2, int tipo1){
     int fraqueza;
-    if (tipo2==1 && tipo1==2){
-        fraqueza=1;
-    }
-    else if (tipo2==2 && tipo1==3){
-        fraqueza=1;
-    }
-    else if (tipo2==3 && tipo1==1){
+    if (tipo2==1 && tipo1==2 || tipo2==2 && tipo1==3 || tipo2==3 && tipo1==1){
         fraqueza=1;
     }
     else{
@@ -165,13 +147,7 @@ int fraquezar(int tipo2, int tipo1){
 }
 int resistenciar(int tipo2, int tipo1){
     int resistencia;
-    if(tipo2==1 && tipo1==3){
-        resistencia=1;
-    }
-    else if(tipo2==2 && tipo1==1){
-        resistencia=1;;
-    }
-    else if(tipo2==3 && tipo1==2){
+    if(tipo2==1 && tipo1==3 || tipo2==2 && tipo1==1 || tipo2==3 && tipo1==2 ){
         resistencia=1;
     }
     else{
@@ -190,6 +166,7 @@ int main (){
     int t=1;
     int velep, veler;
     int saudetotalp, saudetotalr, sauderestantep, sauderestanter;
+    int exp;
     srand(time(NULL));
     printf("Qual o nome do seu parceiro?\n");
     scanf("%s", nome1);
@@ -232,6 +209,7 @@ int main (){
         printf("%s %d/%d vs %s %d/%d\n", nome1, sauderestantep, saudetotalp, nome2, sauderestanter, saudetotalr);
         if(velep>veler){
             int danop, danor;
+            printf("Vez de %s atarcar:\n", nome1);
             danop=ataquep(nivelp, tipo1)-defesar(nivelr, tipo2);
             if (danop<=0){
                 danop=3;
@@ -255,9 +233,20 @@ int main (){
             printf("%s causou %d de dano em %s\n", nome1, danop, nome2);
             sauderestanter=sauderestanter-danop;
             if(sauderestanter<=0){
-                printf("%s foi derrotado! %s é o vencedor!\n", nome2, nome1);
+                printf("%s foi derrotado! %s é o vencedor! ", nome2, nome1);
+                if (nivelr>nivelp){
+                    exp=nivelp*5;
+                }
+                else if(nivelp==nivelr){
+                    exp=nivelp*3;
+                }
+                else{
+                    exp=nivelp*2;
+                }
+                printf("%s ganhou %d de experiência!\n", nome1, exp);
                 break;
             }
+            printf("Vez de %s atacar:\n", nome2);
             danor=ataquer(nivelr, tipo2)-defesap(nivelp,tipo1);
             if (danor<=0){
                 danor=3;
@@ -278,12 +267,23 @@ int main (){
             printf("%s causou %d de dano em %s\n", nome2, danor, nome1);
             sauderestantep=sauderestantep-danor;
             if (sauderestantep<=0){
-                printf("%s foi derrotado! %s é o vencedor!\n", nome2, nome1);
+                printf("%s foi derrotado! %s é o vencedor! ", nome2, nome1);
+                if (nivelp>nivelr){
+                    exp=nivelr*5;
+                }
+                else if(nivelp==nivelr){
+                    exp=nivelr*3;
+                }
+                else{
+                    exp=nivelr*2;
+                }
+                printf("%s ganhou %d de experiência!\n", nome1, exp);
                 break;
             }
         }
         else if(velep<veler){            
             int danop, danor;
+            printf("Vez de %s atacar:\n", nome2);
             danor=ataquep(nivelp, tipo1)-defesar(nivelr, tipo2);
             if (danor<=0){
                 danor=3;
@@ -307,9 +307,20 @@ int main (){
             printf("%s causou %d de dano em %s\n", nome2, danor, nome1);
             sauderestantep=sauderestantep-danor;
             if(sauderestantep<=0){
-                printf("%s foi derrotado! %s é o vencedor!\n", nome1, nome2);
+                printf("%s foi derrotado! %s é o vencedor! ", nome1, nome2);
+                if (nivelp>nivelr){
+                    exp=nivelr*5;
+                }
+                else if(nivelp==nivelr){
+                    exp=nivelr*3;
+                }
+                else{
+                    exp=nivelr*2;
+                }
+                printf("%s ganhou %d de experiência!\n", nome2, exp);
                 break;
             }
+            printf("Vez de %s atacar:\n", nome1);
             danop=ataquep(nivelp, tipo1)-defesar(nivelr,tipo2);
             if (danop<=0){
                 danop=3;
@@ -325,12 +336,22 @@ int main (){
             int chance4= rand() % 20 +1;
             if(chance4==2){
                 danop=danop*3;
-                printf("NOSSA! Um golpe c´ritico! ");
+                printf("NOSSA! Um golpe crítico! ");
             }
-            printf("%s causou %d de dano em %s\n", nome2, danor, nome1);
-            sauderestantep=sauderestantep-danor;
+            printf("%s causou %d de dano em %s\n", nome1, danop, nome2);
+            sauderestanter=sauderestanter-danop;
             if (sauderestanter<=0){
-                printf("%s foi derrotado! %s é o vencedor!\n", nome2, nome1);
+                printf("%s foi derrotado! %s é o vencedor! ", nome2, nome1);
+                if (nivelr>nivelp){
+                    exp=nivelp*5;
+                }
+                else if(nivelp==nivelr){
+                    exp=nivelp*3;
+                }
+                else{
+                    exp=nivelp*2;
+                }
+                printf("%s ganhou %d de experiência!\n", nome1, exp);
                 break;
             }
         }
@@ -344,6 +365,10 @@ int main (){
                 velep+=1;
                 printf("Deacordo com o desempate, %s atacará primeiro!\n", nome1);
             }
+
+        }
+    }
+}
 
         }
     }
