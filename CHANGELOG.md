@@ -13,13 +13,14 @@ Pull Requests aceitos:
 **Correção de erros**:correção do erro de que quando os 2 Pokémons tinham a mesma velocidade apenas um levava dano por meio de um desempate realizado por aleatoriedade.
 **Mecanica de ataque crítico**: adição da chance de ambos os participantes terem a chance de 5% de dar um dano crítico.
 **Correção de erros**: foi corrigido a parte de dano que o parceiro recebe quando o inimigo ataca primeiro, a saúde do parceiro estava sendo subtraída duas por turno, pois a variáveis usadas para fazer esta conta eram as mesmas para tirar vida do parceiro no turno do rival, parecendo que o rival atacasse 2 vezes. Para resolver o problema simplesmente troquei o nome das variáveis.
-**Simplificação das funções**: as funções de fraqueza e tinham um total de 2 "else if", então troquei eles por um único "if" com 3 "||"(ou) que retornam um valor verdadeiro e um "else" que retorna um valor falso.
-Adição de mensagem: logo antes a mensagem que informa quem atacou quem e quanto de dano deu, foi a adicionado a mensagem "Vez de %s atacar: " para deixar mais claro quem atacou de forma mais rápida.
+**Simplificação das funções**: as funções de fraqueza e resistencia usavam as funções "else if", para facilitar a sua compreensão, essa função foi substituida por "swich case" para facilitar a sua compreenção.
 **Sistema de experiência**: Após a vitória de um dos competidores, aparecerá uma mensagem informando que o vencedor ganhou uma quantidade de experiência. Essa quantidade será calculado dependendo do nível do vencer e a diferença de nível entre os dois, se o perdedor tiver um nível maior, o vencedor ganhará a quantidade de 5 vezes o seu nível, se forem de mesmo nível será 3 vezes o seu nível e se tiver um nível maior será 2 vezes o seu nível.
 **Simplificação de função**: Foram retirados os 'else if' usados para calcular a experiência ganha pelo vencedor e substituídas por duas funções (uma para cada vencedor) que fazem esse calculo.
-Expande sistema de 3 para 9 tipos de Pokemon
-**Interface collorida**: Adiciona interface colorida no terminal com cores por tipo
-**Barra de vida dinâmica**: Implementa barra de HP visual dinamica
-**Prevenção de bugs**: Adiciona validacao robusta de entrada (previne bugs com letras)
-**Correção de bugs**Corrige bugs de calculo de dano e logica de combate
-Remove caracteres UTF-8 problematicos no Windows
+Expande sistema de 3 para 9 tipos de Pokemon.
+**Interface colorida**: Adiciona interface colorida no terminal com cores por tipo.
+**Barra de vida dinâmica**: Implementa barra de HP visual dinamica.
+**Prevenção de bugs**: Adiciona validacao robusta de entrada (previne bugs com letras).
+**Correção de bugs**Corrige bugs de calculo de dano e logica de combate.
+
+06/11/2025-Versão final:
+Foram mantidas as funções iniciais com o incremento de 6 tipos de pokemons novos (total 9 tipos), adição de mecânicas de experiência e de ataques críticos, simplificação de funções, interface colorido na escolha de tipo, diferentes momentos da batalha e barra de vida dinâmica.
