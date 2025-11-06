@@ -153,6 +153,32 @@ int resistenciar(int tipo2, int tipo1){
     }
     return resistencia;
 }
+int experienciar(int nivelp, int nivelr){
+    int exp;
+    if (nivelp>nivelr){
+        exp=nivelr*5;
+    }
+    else if(nivelp==nivelr){
+        exp=nivelr*3;
+    }
+    else{
+        exp=nivelr*2;
+    }
+    return exp;
+}
+int experienciap(int nivelr, int nivelp){
+    int exp;
+    if (nivelr>nivelp){
+        exp=nivelp*5;
+    }
+    else if(nivelr==nivelp){
+        exp=nivelp*3;
+    }
+    else{
+        exp=nivelp*2;
+    }
+    return exp;
+}
 int main (){
     setlocale(LC_ALL, "pt_BR.UTF-8");
     char nome1[20];
@@ -180,7 +206,6 @@ int main (){
     printf("Seu rival é um pokemon do tipo:\n");
     printf("1-Fogo 2-Agua 3-Planta\n");
     scanf("%d", &tipo2);
-    /* calcular velocidades APÓS ler nível e tipo */
 
     saudetotalp=saudep(nivelp, tipo1);
     saudetotalr=sauder(nivelr, tipo2);
@@ -232,16 +257,7 @@ int main (){
             sauderestanter=sauderestanter-danop;
             if(sauderestanter<=0){
                 printf("%s foi derrotado! %s é o vencedor! ", nome2, nome1);
-                if (nivelr>nivelp){
-                    exp=nivelp*5;
-                }
-                else if(nivelp==nivelr){
-                    exp=nivelp*3;
-                }
-                else{
-                    exp=nivelp*2;
-                }
-                printf("%s ganhou %d de experiência!\n", nome1, exp);
+                printf("%s ganhou %d de experiência!\n", nome1, experienciap(nivelp, nivelr));
                 break;
             }
             printf("Vez de %s atacar:\n", nome2);
@@ -266,16 +282,7 @@ int main (){
             sauderestantep=sauderestantep-danor;
             if (sauderestantep<=0){
                 printf("%s foi derrotado! %s é o vencedor! ", nome2, nome1);
-                if (nivelp>nivelr){
-                    exp=nivelr*5;
-                }
-                else if(nivelp==nivelr){
-                    exp=nivelr*3;
-                }
-                else{
-                    exp=nivelr*2;
-                }
-                printf("%s ganhou %d de experiência!\n", nome1, exp);
+                printf("%s ganhou %d de experiência!\n", nome1, experienciar(nivelp, nivelr));
                 break;
             }
         }
@@ -306,16 +313,7 @@ int main (){
             sauderestantep=sauderestantep-danor;
             if(sauderestantep<=0){
                 printf("%s foi derrotado! %s é o vencedor! ", nome1, nome2);
-                if (nivelp>nivelr){
-                    exp=nivelr*5;
-                }
-                else if(nivelp==nivelr){
-                    exp=nivelr*3;
-                }
-                else{
-                    exp=nivelr*2;
-                }
-                printf("%s ganhou %d de experiência!\n", nome2, exp);
+                printf("%s ganhou %d de experiência!\n", nome2, experienciar(nivelp, nivelr));
                 break;
             }
             printf("Vez de %s atacar:\n", nome1);
@@ -340,16 +338,7 @@ int main (){
             sauderestanter=sauderestanter-danop;
             if (sauderestanter<=0){
                 printf("%s foi derrotado! %s é o vencedor! ", nome2, nome1);
-                if (nivelr>nivelp){
-                    exp=nivelp*5;
-                }
-                else if(nivelp==nivelr){
-                    exp=nivelp*3;
-                }
-                else{
-                    exp=nivelp*2;
-                }
-                printf("%s ganhou %d de experiência!\n", nome1, exp);
+                printf("%s ganhou %d de experiência!\n", nome1, experienciar(nivelp, nivelr));
                 break;
             }
         }
@@ -363,7 +352,6 @@ int main (){
                 velep+=1;
                 printf("Deacordo com o desempate, %s atacará primeiro!\n", nome1);
             }
-
         }
     }
 }
