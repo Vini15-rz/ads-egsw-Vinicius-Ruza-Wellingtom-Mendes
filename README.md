@@ -19,9 +19,15 @@ Observação: a opção -lm liga a biblioteca matemática (uso de trunc).
 
 Os tipos suportados são informados por número:
 
-- 1 = Fogo 🔥
-- 2 = Água  💧
-- 3 = Planta 🌱
+- 1 = Fogo 
+- 2 = Água  
+- 3 = Planta
+- 4 = Elétrico
+- 5 = Gelo
+- 6 = Lutador
+- 7 = Voador
+- 8 = Psiquico
+- 9 = Noturno
 
 - Ordem do turno: quem tem maior velocidade ataca primeiro.
 - Dano: ataque − defesa; se o resultado for menor ou igual a 0, causa 3 de dano.
@@ -32,7 +38,7 @@ Os tipos suportados são informados por número:
 
 ## Fluxo de jogo
 
-1) O programa pede: nome, nível e tipo (1/2/3) do seu Pokémon e do rival.
+1) O programa pede: nome, nível e tipo do seu Pokémon e do rival.
 2) Mostra os status calculados de cada um.
 3) Executa turnos até que a saúde de um chegue a 0.
 4) Exibe mensagens sobre dano, eficácia e o vencedor.
